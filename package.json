@@ -1,0 +1,23 @@
+{
+  "name": "usermanagement",
+  "version": "1.0.0",
+  "description": "The goal of this assignment is to develop a User Management System using Express.js (Node.js) and MongoDB. The application will allow users to register, log in, and manage their profiles. The system will include user authentication using JWT tokens and password encryption with bcrypt.js to ensure security.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

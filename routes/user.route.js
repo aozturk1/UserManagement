@@ -1,21 +1,21 @@
 const express = require("express");
-const User = require("../models/user.model.js");
+const { getUsers, getUser, createUser, updateUser, deleteUser, loginUser, getUserProfile } = require('../controllers/user.controller.js');
+const verifyToken = require('../middleware/authorization.middleware.js');
+
 const router = express.Router();
-const {getUsers, getUser, createUser, updateUser, deleteUser} = require('../controllers/user.controller.js');
+
+// public
+router.post('/login', loginUser);     // Login
+router.post('/register', createUser); // Register
 
 
-router.get('/', getUsers);
-router.get("/:id", getUser);
+router.use(verifyToken);
 
-router.post("/", createUser);
-
-// update a User
-router.put("/:id", updateUser);
-
-// delete a User
-router.delete("/:id", deleteUser);
-
-
-
+// protected
+router.get('/', getUsers);              // Get all users
+router.get('/profile', getUserProfile); // Get user profile
+router.get('/:id', getUser);            // Get user by ID
+router.put('/:id', updateUser);         // Update user by ID
+router.delete('/:id', deleteUser);      // Delete user by ID
 
 module.exports = router;

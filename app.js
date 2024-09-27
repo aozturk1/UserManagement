@@ -15,18 +15,15 @@ app.use(express.json());
 app.use("/api/users", userRoute);
 
 app.get("/", (req, res) => {
-  res.send("try /users to manage users");
+    res.send("try /users to manage users");
 });
 
 mongoose
-//process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }
-  .connect(
-    "mongodb+srv://tungalperozturk:SD6dQHNf5wAf0ld6@nodeapi.w6bbu.mongodb.net/Node-API?retryWrites=true&w=majority&appName=NodeAPI"
-  )
-  .then(() => {
-    console.log("Connected to database!");
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
-  })
-  .catch(err => console.log(`Connection failed, ${err}.`));
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("Connected to database!");
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    })
+    .catch(err => console.log(`Connection failed, ${err}.`));

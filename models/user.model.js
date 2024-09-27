@@ -1,37 +1,35 @@
 const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema(
-  {
-    firstName: {
-      type: String,
-      required: [true, "Please enter first name"],
-    },
+    {
+        firstName: {
+            type: String,
+            required: [true, "Please enter first name"],
+        },
 
-    lastName: {
-        type: String,
-        required: [true, "Please enter last name"],
-    },
+        lastName: {
+            type: String,
+            required: [true, "Please enter last name"],
+        },
 
-    email: {
-      type: String,
-      required: true,
-      default: 0,
-    },
+        email: {
+            type: String,
+            required: [true, "Please enter email address"],
+        },
 
-    password: {
-      type: String,
-      required: true,
-      default: 0,
-    },
+        password: {
+            type: String,
+            required: true,
+        },
 
-    isAdmin: {
-      type: Boolean,
-      required: false,
+        isAdmin: {
+            type: Boolean,
+            required: false,
+        },
     },
-  },
-  {
-    timestamps: true,
-  }
+    {
+        timestamps: true,
+    }
 );
 
 

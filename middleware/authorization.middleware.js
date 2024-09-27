@@ -11,4 +11,12 @@ const verifyToken = (req, res, next) => {
     });
 };
 
-module.exports = verifyToken;
+const verifyAdmin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next(); // Proceed to the next function
+    } else {
+        return res.status(403).json({ message: "Access denied: Admins only" });
+    }
+};
+
+module.exports = {verifyToken, verifyAdmin};

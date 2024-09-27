@@ -51,30 +51,37 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email} = req.body;
 
     try {
-        // Ensure email is unique
-        const userExists = await User.findOne({ email });
-        if (userExists) {
-            return res.status(400).json({ message: "Email already in use!" });
-        }
-        const { id } = req.params;
-
-        // Avoid updating isAdmin
-        const user = await User.findByIdAndUpdate(id, { firstName, lastName, email });
+        // Find the user by ID from the token
+        const user = await User.findById(req.user.id);
 
         if (!user) {
             return res.status(404).json({ message: "User not found!" });
         }
 
-        const updatedUser = await User.findById(id);
+        // Ensure the new email is unique
+        if (email && email !== user.email) {
+            const emailExists = await User.findOne({ email });
+            if (emailExists) {
+                return res.status(400).json({ message: "Email already in use!" });
+            }
+            user.email = email;
+        }
+
+        // Update other fields
+        if (firstName) user.firstName = firstName;
+        if (lastName) user.lastName = lastName;
+
+        // Save the updated user profile
+        const updatedUser = await user.save();
         res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 const deleteUser = async (req, res) => {
     try {

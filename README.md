@@ -49,7 +49,7 @@ Protected calls:<br>
 --> Use the jwt token from the response in a header like this: <br> --> Authorization:Bearer <'token'> 
 
 - GET /api/users/profile --> Get the profile of the authed user
-- PUT /api/users/:id --> Update the profile of the authed user 
+- PUT /api/users/profile --> Update the profile of the authed user 
 
 <br>
 
